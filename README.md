@@ -1,9 +1,9 @@
-# Automation Testing Framework
+# Automation Framework
 
 A comprehensive automation testing framework built with Java, Maven, TestNG, and Selenium WebDriver following the Page Object Model design pattern.
 
 **Created by:** ajaajahmad
-**Last Updated:** 2025-08-08
+**Last Updated:** 2025-09-28
 **Framework Version:** 1.0.0
 
 ## 🚀 Features
