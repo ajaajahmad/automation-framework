@@ -25,7 +25,9 @@ public class StandaloneTest {
 
 		List<WebElement> productList = driver.findElements(By.cssSelector(".mb-3"));
 
-		productList.stream().filter(product -> product.getText().equals("ZARA COAT 3"));
+		WebElement prod = productList.stream()
+				.filter(product -> product.findElement(By.cssSelector("b")).equals("ZARA COAT 3")).findFirst()
+				.orElse(null);
 
 	}
 }
