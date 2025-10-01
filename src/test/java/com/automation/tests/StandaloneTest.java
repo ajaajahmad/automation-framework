@@ -29,5 +29,7 @@ public class StandaloneTest {
 				.filter(product -> product.findElement(By.cssSelector("b")).equals("ZARA COAT 3")).findFirst()
 				.orElse(null);
 
+		prod.findElement(By.cssSelector(".card-body  button:last-of-type")).click();
+
 	}
 }
