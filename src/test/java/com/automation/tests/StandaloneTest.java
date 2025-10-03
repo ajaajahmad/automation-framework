@@ -62,6 +62,7 @@ public class StandaloneTest {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section[class*='ta-results']")));
 
 		driver.findElement(By.cssSelector(".ta-item:nth-of-type(2)")).click();
+		driver.findElement(By.cssSelector(".actions a")).click();
 
 		Thread.sleep(2000);
 
