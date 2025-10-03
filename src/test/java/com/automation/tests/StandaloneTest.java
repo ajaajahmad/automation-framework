@@ -50,5 +50,7 @@ public class StandaloneTest {
 		boolean match = cartProducts.stream().anyMatch(p -> p.getText().equalsIgnoreCase(productName));
 
 		Assert.assertTrue(match);
+
+		driver.quit();
 	}
 }
