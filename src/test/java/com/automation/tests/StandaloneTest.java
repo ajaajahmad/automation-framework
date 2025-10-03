@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -15,7 +16,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class StandaloneTest {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 
 		String productName = "ZARA COAT 3";
 
@@ -50,6 +51,19 @@ public class StandaloneTest {
 		boolean match = cartProducts.stream().anyMatch(p -> p.getText().equalsIgnoreCase(productName));
 
 		Assert.assertTrue(match);
+
+		driver.findElement(By.cssSelector(".totalRow button")).click();
+
+		Actions action = new Actions(driver);
+
+		action.sendKeys(driver.findElement(By.cssSelector("input[placeholder='Select Country']")), "india").build()
+				.perform();
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section[class*='ta-results']")));
+
+		driver.findElement(By.cssSelector(".ta-item:nth-of-type(2)")).click();
+
+		Thread.sleep(2000);
 
 		driver.quit();
 	}
