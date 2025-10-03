@@ -24,6 +24,8 @@ public class StandaloneTest {
 		driver.findElement(By.id("userEmail")).sendKeys("test.user@domain.com");
 		driver.findElement(By.id("userPassword")).sendKeys("Asdf@123");
 		driver.findElement(By.id("login")).click();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
 
 		List<WebElement> productList = driver.findElements(By.cssSelector(".mb-3"));
 
@@ -33,7 +35,6 @@ public class StandaloneTest {
 
 		prod.findElement(By.cssSelector(".card-body  button:last-of-type")).click();
 
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
 
 	}
