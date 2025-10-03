@@ -25,13 +25,15 @@ public class StandaloneTest {
 		driver.findElement(By.id("userPassword")).sendKeys("Asdf@123");
 		driver.findElement(By.id("login")).click();
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("mb-3")));
+		
 		List<WebElement> productList = driver.findElements(By.cssSelector(".mb-3"));
 
 		WebElement prod = productList.stream()
 				.filter(product -> product.findElement(By.cssSelector("b")).getText().equals("ZARA COAT 3")).findFirst()
 				.orElse(null);
 		prod.findElement(By.cssSelector(".card-body  button:last-of-type")).click();
+		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
 
 	}
