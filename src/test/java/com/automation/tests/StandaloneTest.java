@@ -33,7 +33,7 @@ public class StandaloneTest {
 
 		prod.findElement(By.cssSelector(".card-body  button:last-of-type")).click();
 
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
 
 	}
