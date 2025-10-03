@@ -31,7 +31,6 @@ public class StandaloneTest {
 		WebElement prod = productList.stream()
 				.filter(product -> product.findElement(By.cssSelector("b")).getText().equals("ZARA COAT 3")).findFirst()
 				.orElse(null);
-
 		prod.findElement(By.cssSelector(".card-body  button:last-of-type")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
 
