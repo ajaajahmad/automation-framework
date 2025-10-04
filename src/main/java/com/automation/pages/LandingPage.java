@@ -1,16 +1,19 @@
 package com.automation.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LandingPage {
+import com.automation.base.BasePage;
+
+public class LandingPage extends BasePage {
 
 	WebDriver driver;
 
 	public LandingPage(WebDriver driver) {
+
+		super(driver);
 		// initialization
 		this.driver = driver;
 
