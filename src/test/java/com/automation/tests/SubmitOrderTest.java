@@ -27,9 +27,8 @@ public class SubmitOrderTest {
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.get("https://rahulshettyacademy.com/client/#/auth/login");
-
 		LandingPage landingPage = new LandingPage(driver);
+		landingPage.goTo();
 		landingPage.userLogin("test.user@domain.com", "Asdf@123");
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));

@@ -35,4 +35,9 @@ public class LandingPage {
 		loginButton.click();
 	}
 
+	public void goTo() {
+
+		driver.get("https://rahulshettyacademy.com/client/#/auth/login");
+	}
+
 }
