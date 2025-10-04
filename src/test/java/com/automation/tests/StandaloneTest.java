@@ -13,6 +13,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.automation.pages.LandingPage;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class StandaloneTest {
@@ -26,6 +28,9 @@ public class StandaloneTest {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.get("https://rahulshettyacademy.com/client/#/auth/login");
+		
+		LandingPage page = new LandingPage(driver);
+		
 		driver.findElement(By.id("userEmail")).sendKeys("test.user@domain.com");
 		driver.findElement(By.id("userPassword")).sendKeys("Asdf@123");
 		driver.findElement(By.id("login")).click();
@@ -63,13 +68,17 @@ public class StandaloneTest {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section[class*='ta-results']")));
 
 		driver.findElement(By.cssSelector(".ta-item:nth-of-type(2)")).click();
-		
+
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		
+
 		js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.cssSelector(".actions a")));
-		
+
 		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".actions a")));
 		driver.findElement(By.cssSelector(".actions a")).click();
+
+		WebElement confirmationText = driver.findElement(By.cssSelector(".hero-primary"));
+
+		Assert.assertTrue(confirmationText.getText().equalsIgnoreCase("Thankyou for the order."));
 
 		Thread.sleep(2000);
 
