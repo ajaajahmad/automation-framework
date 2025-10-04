@@ -44,8 +44,7 @@ public class SubmitOrderTest {
 		Assert.assertTrue(match);
 		CheckoutPage checkoutPage = cartPage.goToCheckout();
 		checkoutPage.selectCountry("india");
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.cssSelector(".actions a")));
+
 		ConfirmationPage confirmationPage = checkoutPage.submitOrder();
 
 		String confirmationMessage = confirmationPage.getConfirmationMessage();
