@@ -28,21 +28,15 @@ public class SubmitOrderTest {
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
 		LandingPage landingPage = new LandingPage(driver);
 		landingPage.goTo();
 		landingPage.userLogin("test.user@domain.com", "Asdf@123");
 
 		ProductCateloguePage productCatelogue = new ProductCateloguePage(driver);
 		List<WebElement> productList = productCatelogue.getProductList();
-
-		WebElement prod = productList.stream()
-				.filter(product -> product.findElement(By.cssSelector("b")).getText().equals("ZARA COAT 3")).findFirst()
-				.orElse(null);
-		prod.findElement(By.cssSelector(".card-body  button:last-of-type")).click();
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
-
-		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.cssSelector(".ng-animating"))));
+		productCatelogue.addProductToCard(productName);
 
 		driver.findElement(By.cssSelector("[routerlink*=cart]")).click();
 

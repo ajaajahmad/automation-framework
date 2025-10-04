@@ -25,8 +25,12 @@ public class ProductCateloguePage extends BasePage {
 	@FindBy(css = ".mb-3")
 	List<WebElement> productList;
 
+	@FindBy(css = ".ng-animating")
+	WebElement spinner;
+
 	By products = By.cssSelector(".mb-3");
 	By addToCard = By.cssSelector(".card-body  button:last-of-type");
+	By toastMessage = By.cssSelector("#toast-container");
 
 	public List<WebElement> getProductList() {
 		waitForElementToAppear(products);
@@ -46,6 +50,8 @@ public class ProductCateloguePage extends BasePage {
 
 		WebElement prod = getProductByName(productName);
 		prod.findElement(addToCard).click();
+		waitForElementToAppear(toastMessage);
+		waitForElementToDisappear(spinner);
 
 	}
 
