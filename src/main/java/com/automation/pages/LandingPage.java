@@ -28,4 +28,11 @@ public class LandingPage {
 	@FindBy(id = "login")
 	WebElement loginButton;
 
+	public void userLogin(String email, String password) {
+
+		userEmail.sendKeys(email);
+		userPass.sendKeys(password);
+		loginButton.click();
+	}
+
 }
