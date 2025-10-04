@@ -31,11 +31,13 @@ public class LandingPage extends BasePage {
 	@FindBy(id = "login")
 	WebElement loginButton;
 
-	public void userLogin(String email, String password) {
+	public ProductCateloguePage userLogin(String email, String password) {
 
 		userEmail.sendKeys(email);
 		userPass.sendKeys(password);
 		loginButton.click();
+		ProductCateloguePage productCatelogue = new ProductCateloguePage(driver);
+		return productCatelogue;
 	}
 
 	public void goTo() {

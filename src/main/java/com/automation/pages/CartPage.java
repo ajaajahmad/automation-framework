@@ -26,9 +26,13 @@ public class CartPage extends BasePage {
 	WebElement checkoutButton;
 
 	public boolean verifyProducDisplay(String productName) {
-
 		boolean match = cartProducts.stream().anyMatch(p -> p.getText().equalsIgnoreCase(productName));
 		return match;
+	}
+
+	public void goToCheckout() {
+		checkoutButton.click();
+		CheckoutPage checkoutPage = new CheckoutPage(driver);
 	}
 
 }

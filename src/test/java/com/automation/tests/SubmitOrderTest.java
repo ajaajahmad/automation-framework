@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.automation.pages.CartPage;
 import com.automation.pages.LandingPage;
 import com.automation.pages.ProductCateloguePage;
 
@@ -32,25 +33,18 @@ public class SubmitOrderTest {
 
 		LandingPage landingPage = new LandingPage(driver);
 		landingPage.goTo();
-		landingPage.userLogin("test.user@domain.com", "Asdf@123");
-
-		ProductCateloguePage productCatelogue = new ProductCateloguePage(driver);
+		ProductCateloguePage productCatelogue = landingPage.userLogin("test.user@domain.com", "Asdf@123");
 		List<WebElement> productList = productCatelogue.getProductList();
 		productCatelogue.addProductToCard(productName);
+		CartPage cartPage = productCatelogue.goToCardPage();
 
-		driver.findElement(By.cssSelector("[routerlink*=cart]")).click();
-
-		List<WebElement> cartProducts = driver.findElements(By.cssSelector(".cartSection h3"));
-
-		boolean match = cartProducts.stream().anyMatch(p -> p.getText().equalsIgnoreCase(productName));
-
+		boolean match = cartPage.verifyProducDisplay(productName);
 		Assert.assertTrue(match);
-
-		driver.findElement(By.cssSelector(".totalRow button")).click();
+		cartPage.goToCheckout();
 
 		Actions action = new Actions(driver);
 
-		action.sendKeys(driver.findElement(By.cssSelector("input[placeholder='Select Country']")), "india").build()
+		action.sendKeys(driver.findElement(By.cssSelector("S")), "india").build()
 				.perform();
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section[class*='ta-results']")));
