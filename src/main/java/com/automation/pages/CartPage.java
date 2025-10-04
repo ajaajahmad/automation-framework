@@ -30,9 +30,9 @@ public class CartPage extends BasePage {
 		return match;
 	}
 
-	public void goToCheckout() {
+	public CheckoutPage goToCheckout() {
 		checkoutButton.click();
-		CheckoutPage checkoutPage = new CheckoutPage(driver);
+		return new CheckoutPage(driver);
 	}
 
 }

@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.automation.pages.CartPage;
+import com.automation.pages.CheckoutPage;
+import com.automation.pages.ConfirmationPage;
 import com.automation.pages.LandingPage;
 import com.automation.pages.ProductCateloguePage;
 
@@ -40,27 +42,15 @@ public class SubmitOrderTest {
 
 		boolean match = cartPage.verifyProducDisplay(productName);
 		Assert.assertTrue(match);
-		cartPage.goToCheckout();
-
-		Actions action = new Actions(driver);
-
-		action.sendKeys(driver.findElement(By.cssSelector("S")), "india").build()
-				.perform();
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section[class*='ta-results']")));
-
-		driver.findElement(By.cssSelector(".ta-item:nth-of-type(2)")).click();
-
+		CheckoutPage checkoutPage = cartPage.goToCheckout();
+		checkoutPage.selectCountry("india");
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-
 		js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.cssSelector(".actions a")));
+		ConfirmationPage confirmationPage = checkoutPage.submitOrder();
 
-		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".actions a")));
-		driver.findElement(By.cssSelector(".actions a")).click();
+		String confirmationMessage = confirmationPage.getConfirmationMessage();
 
-		WebElement confirmationText = driver.findElement(By.cssSelector(".hero-primary"));
-
-		Assert.assertTrue(confirmationText.getText().equalsIgnoreCase("Thankyou for the order."));
+		Assert.assertTrue(confirmationMessage.equalsIgnoreCase("Thankyou for the order."));
 
 		Thread.sleep(2000);
 
