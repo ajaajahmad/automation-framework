@@ -26,10 +26,27 @@ public class ProductCateloguePage extends BasePage {
 	List<WebElement> productList;
 
 	By products = By.cssSelector(".mb-3");
+	By addToCard = By.cssSelector(".card-body  button:last-of-type");
 
 	public List<WebElement> getProductList() {
 		waitForElementToAppear(products);
 		return productList;
+	}
+
+	public WebElement getProductByName(String productName) {
+
+		WebElement prod = productList.stream()
+				.filter(product -> product.findElement(By.cssSelector("b")).getText().equals(productName)).findFirst()
+				.orElse(null);
+
+		return prod;
+	}
+
+	public void addProductToCard(String productName) {
+
+		WebElement prod = getProductByName(productName);
+		prod.findElement(addToCard).click();
+
 	}
 
 }

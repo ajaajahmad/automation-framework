@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.automation.pages.LandingPage;
+import com.automation.pages.ProductCateloguePage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -31,11 +32,8 @@ public class SubmitOrderTest {
 		landingPage.goTo();
 		landingPage.userLogin("test.user@domain.com", "Asdf@123");
 
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".mb-3")));
-
-		List<WebElement> productList = driver.findElements(By.cssSelector(".mb-3"));
+		ProductCateloguePage productCatelogue = new ProductCateloguePage(driver);
+		List<WebElement> productList = productCatelogue.getProductList();
 
 		WebElement prod = productList.stream()
 				.filter(product -> product.findElement(By.cssSelector("b")).getText().equals("ZARA COAT 3")).findFirst()
