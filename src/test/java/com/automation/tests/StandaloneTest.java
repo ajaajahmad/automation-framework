@@ -63,8 +63,11 @@ public class StandaloneTest {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section[class*='ta-results']")));
 
 		driver.findElement(By.cssSelector(".ta-item:nth-of-type(2)")).click();
+		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.cssSelector("actions a")));
+		
+		js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.cssSelector(".actions a")));
+		
 		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".actions a")));
 		driver.findElement(By.cssSelector(".actions a")).click();
 
