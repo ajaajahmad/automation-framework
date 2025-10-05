@@ -1,5 +1,7 @@
 package com.automation.tests;
 
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
@@ -36,7 +38,7 @@ public class SubmitOrderTest extends BaseTest {
 		CartPage cartPage = productCatelogue.goToCardPage();
 
 		boolean match = cartPage.verifyProducDisplay(productName);
-		Assert.assertTrue(match);
+		AssertJUnit.assertTrue(match);
 		CheckoutPage checkoutPage = cartPage.goToCheckout();
 		checkoutPage.selectCountry("india");
 
@@ -47,7 +49,7 @@ public class SubmitOrderTest extends BaseTest {
 
 		String confirmationMessage = confirmationPage.getConfirmationMessage();
 
-		Assert.assertTrue(confirmationMessage.equalsIgnoreCase("Thankyou for the order."));
+		AssertJUnit.assertTrue(confirmationMessage.equalsIgnoreCase("Thankyou for the order."));
 
 	}
 
