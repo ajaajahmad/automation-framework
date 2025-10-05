@@ -14,6 +14,7 @@ import com.automation.pages.CheckoutPage;
 import com.automation.pages.ConfirmationPage;
 import com.automation.pages.OrderPage;
 import com.automation.pages.ProductCateloguePage;
+import com.automation.utils.JsonDataReader;
 
 public class SubmitOrderTest extends BaseTest {
 
@@ -48,19 +49,30 @@ public class SubmitOrderTest extends BaseTest {
 	}
 
 	@DataProvider
-	public Object[][] getData() {
+	public Object[][] getData() throws IOException {
 
-		HashMap<String, String> map1 = new HashMap<String, String>();
-		map1.put("email", "test.user@domain.com");
-		map1.put("password", "Asdf@123");
-		map1.put("product", "ZARA COAT 3");
+		JsonDataReader jsonReader = new JsonDataReader();
+		List<HashMap<String, String>> data = jsonReader
+				.getJsonDataToMap(System.getProperty("user.dir") + "/src/main/resources/testdata/PurchaseData.json");
 
-		HashMap<String, String> map2 = new HashMap<String, String>();
-		map2.put("email", "test.user2@domain.com");
-		map2.put("password", "Asdf@123");
-		map2.put("product", "ADIDAS ORIGINAL");
-
-		return new Object[][] { { map1 }, { map2 } };
+		return new Object[][] { { data.get(0) }, { data.get(1) } };
 	}
+
+//	@DataProvider
+//	public Object[][] getData() throws IOException {
+//
+//	return new Object[][]{{"test.user@domain.com","Asdf@123","ZARA COAT 3"},
+//
+//	{"test.user2@domain.com","Asdf@123","ADIDAS ORIGINAL"}};
+//
+//		HashMap<String, String> map1 = new HashMap<String, String>();
+//		map1.put("email", "test.user@domain.com");
+//		map1.put("password", "Asdf@123");
+//		map1.put("product", "ZARA COAT 3");
+//
+//		HashMap<String, String> map2 = new HashMap<String, String>();
+//		map2.put("email", "test.user2@domain.com");
+//		map2.put("password", "Asdf@123");
+//		map2.put("product", "ADIDAS ORIGINAL");
 
 }
