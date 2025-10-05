@@ -31,6 +31,9 @@ public class LandingPage extends BasePage {
 	@FindBy(id = "login")
 	WebElement loginButton;
 
+	@FindBy(css = "[class*='flyInOut']")
+	WebElement errorMessage;
+
 	public ProductCateloguePage userLogin(String email, String password) {
 
 		userEmail.sendKeys(email);
@@ -38,6 +41,12 @@ public class LandingPage extends BasePage {
 		loginButton.click();
 		ProductCateloguePage productCatelogue = new ProductCateloguePage(driver);
 		return productCatelogue;
+	}
+
+	public String getErrorMessage() {
+		waitForWebElementToAppear(errorMessage);
+		return errorMessage.getText();
+
 	}
 
 	public void goTo() {

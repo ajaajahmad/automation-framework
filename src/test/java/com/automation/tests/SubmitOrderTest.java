@@ -49,9 +49,6 @@ public class SubmitOrderTest extends BaseTest {
 
 		Assert.assertTrue(confirmationMessage.equalsIgnoreCase("Thankyou for the order."));
 
-		Thread.sleep(2000);
-
-		driver.quit();
 	}
 
 }
