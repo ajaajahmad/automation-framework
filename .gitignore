@@ -37,6 +37,7 @@ target/
 *.iml
 test-output/*
 test-output/
+reports/*
 # IntelliJ
 .idea/
 *.ipr
