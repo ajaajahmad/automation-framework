@@ -1,14 +1,11 @@
 package com.automation.tests;
 
 import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
 import java.io.IOException;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import com.automation.base.BaseTest;
 import com.automation.pages.CartPage;
 import com.automation.pages.ProductCateloguePage;
@@ -20,7 +17,7 @@ public class ErrorValidationsTest extends BaseTest {
 
 		String productName = "ZARA COAT 3";
 		landingPage.userLogin("test.user@domai.com", "Asdf@123");
-		AssertJUnit.assertEquals(landingPage.getErrorMessage(), "Incorrect email or password.");
+		Assert.assertEquals(landingPage.getErrorMessage(), "Incorrect email or password.");
 	}
 
 	@Test
@@ -33,7 +30,7 @@ public class ErrorValidationsTest extends BaseTest {
 		CartPage cartPage = productCatelogue.goToCardPage();
 
 		boolean match = cartPage.verifyProducDisplay("ZARA COAT 33");
-		AssertJUnit.assertFalse(match);
+		Assert.assertFalse(match);
 
 	}
 
