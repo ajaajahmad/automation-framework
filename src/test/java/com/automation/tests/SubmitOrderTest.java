@@ -16,7 +16,7 @@ import com.automation.pages.ProductCateloguePage;
 
 public class SubmitOrderTest extends BaseTest {
 
-	String productName = "ZARA COAT 3";
+	// String productName = "ZARA COAT 3";
 
 	@Test(dataProvider = "getData", groups = { "Purchase" })
 	public void submitOrder(String email, String password, String productName)
@@ -41,7 +41,7 @@ public class SubmitOrderTest extends BaseTest {
 	}
 
 	@Test(dataProvider = "getData", dependsOnMethods = { "submitOrder" })
-	public void orderHistory(String email, String password) {
+	public void orderHistory(String email, String password, String productName) {
 		ProductCateloguePage productCatelogue = landingPage.userLogin(email, password);
 		OrderPage orderPage = productCatelogue.goToOrdersPage();
 		Assert.assertTrue(orderPage.verifyOrderDisplay(productName));
