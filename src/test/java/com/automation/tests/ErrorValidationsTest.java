@@ -2,6 +2,7 @@ package com.automation.tests;
 
 import org.testng.annotations.Test;
 import java.io.IOException;
+import java.lang.foreign.GroupLayout;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
@@ -12,7 +13,7 @@ import com.automation.pages.ProductCateloguePage;
 
 public class ErrorValidationsTest extends BaseTest {
 
-	@Test
+	@Test (groups= {"ErrorValidation"})
 	public void loginErrorValidation() {
 
 		String productName = "ZARA COAT 3";
