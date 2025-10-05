@@ -1,10 +1,10 @@
 package com.automation.tests;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.List;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import com.automation.base.BaseTest;
@@ -18,10 +18,11 @@ public class SubmitOrderTest extends BaseTest {
 
 	String productName = "ZARA COAT 3";
 
-	@Test
-	public void submitOrder() throws IOException, InterruptedException {
+	@Test(dataProvider = "getData", groups = { "Purchase" })
+	public void submitOrder(String email, String password, String productName)
+			throws IOException, InterruptedException {
 
-		ProductCateloguePage productCatelogue = landingPage.userLogin("test.user@domain.com", "Asdf@123");
+		ProductCateloguePage productCatelogue = landingPage.userLogin(email, password);
 		List<WebElement> productList = productCatelogue.getProductList();
 		productCatelogue.addProductToCard(productName);
 		CartPage cartPage = productCatelogue.goToCardPage();
@@ -31,9 +32,6 @@ public class SubmitOrderTest extends BaseTest {
 		CheckoutPage checkoutPage = cartPage.goToCheckout();
 		checkoutPage.selectCountry("india");
 
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,800)");
-
 		ConfirmationPage confirmationPage = checkoutPage.submitOrder();
 
 		String confirmationMessage = confirmationPage.getConfirmationMessage();
@@ -42,11 +40,17 @@ public class SubmitOrderTest extends BaseTest {
 
 	}
 
-	@Test(dependsOnMethods = { "submitOrder" })
-	public void orderHistory() {
-		ProductCateloguePage productCatelogue = landingPage.userLogin("test.user@domain.com", "Asdf@123");
+	@Test(dataProvider = "getData", dependsOnMethods = { "submitOrder" })
+	public void orderHistory(String email, String password) {
+		ProductCateloguePage productCatelogue = landingPage.userLogin(email, password);
 		OrderPage orderPage = productCatelogue.goToOrdersPage();
 		Assert.assertTrue(orderPage.verifyOrderDisplay(productName));
+	}
+
+	@DataProvider
+	public Object[][] getData() {
+		return new Object[][] { { "test.user@domain.com", "Asdf@123", "ZARA COAT 3" },
+				{ "test.user2@domain.com", "Asdf@123", "ADIDAS ORIGINAL" } };
 	}
 
 }
