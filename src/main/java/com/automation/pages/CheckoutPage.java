@@ -35,11 +35,11 @@ public class CheckoutPage extends BasePage {
 		action.sendKeys(country, countryName).build().perform();
 		waitForElementToAppear(results);
 		selectCountry.click();
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].scrollIntoView(true);", submitButton);
 	}
 
 	public ConfirmationPage submitOrder() {
+		Actions action = new Actions(driver);
+		action.scrollToElement(submitButton).perform();
 		submitButton.click();
 		return new ConfirmationPage(driver);
 	}
