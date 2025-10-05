@@ -1,5 +1,6 @@
 package com.automation.tests;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
@@ -12,7 +13,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
+import com.automation.base.BaseTest;
 import com.automation.pages.CartPage;
 import com.automation.pages.CheckoutPage;
 import com.automation.pages.ConfirmationPage;
@@ -21,19 +24,15 @@ import com.automation.pages.ProductCateloguePage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class SubmitOrderTest {
+public class SubmitOrderTest extends BaseTest {
 
-	public static void main(String[] args) throws InterruptedException {
+	@Test
+	public void submitOrder() throws IOException, InterruptedException {
 
 		String productName = "ZARA COAT 3";
 
-		WebDriverManager.chromedriver().setup();
-		WebDriver driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-		LandingPage landingPage = new LandingPage(driver);
-		landingPage.goTo();
+		LandingPage landingPage = launchApplication();
+
 		ProductCateloguePage productCatelogue = landingPage.userLogin("test.user@domain.com", "Asdf@123");
 		List<WebElement> productList = productCatelogue.getProductList();
 		productCatelogue.addProductToCard(productName);
@@ -43,7 +42,7 @@ public class SubmitOrderTest {
 		Assert.assertTrue(match);
 		CheckoutPage checkoutPage = cartPage.goToCheckout();
 		checkoutPage.selectCountry("india");
-		
+
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,800)");
 

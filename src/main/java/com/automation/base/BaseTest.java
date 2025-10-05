@@ -8,13 +8,15 @@ import java.util.Properties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import com.automation.pages.LandingPage;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
 
 	public WebDriver driver;
 
-	public void intializeDriver() throws IOException {
+	public WebDriver intializeDriver() throws IOException {
 
 		String filePath = System.getProperty("user.dir") + "//src//main//resources//GlobalData.properties";
 
@@ -34,5 +36,15 @@ public class BaseTest {
 
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
+		return driver;
+	}
+
+	public LandingPage launchApplication() throws IOException {
+		driver = intializeDriver();
+		LandingPage landingPage = new LandingPage(driver);
+		landingPage.goTo();
+		
+		return landingPage;
 	}
 }
