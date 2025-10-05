@@ -30,9 +30,6 @@ public class SubmitOrderTest extends BaseTest {
 	public void submitOrder() throws IOException, InterruptedException {
 
 		String productName = "ZARA COAT 3";
-
-		LandingPage landingPage = launchApplication();
-
 		ProductCateloguePage productCatelogue = landingPage.userLogin("test.user@domain.com", "Asdf@123");
 		List<WebElement> productList = productCatelogue.getProductList();
 		productCatelogue.addProductToCard(productName);
