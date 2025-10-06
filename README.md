@@ -22,7 +22,7 @@ A comprehensive automation testing framework built with Java, Maven, TestNG, and
 ## 📁 Project Structure
 
 ```
-automation-testing-framework/
+automation-framework/
 ├── pom.xml
 ├── README.md
 ├── src/
@@ -75,7 +75,7 @@ automation-testing-framework/
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd automation-testing-framework
+   cd automation-framework
    ```
 
 2. **Install dependencies**
