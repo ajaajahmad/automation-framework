@@ -32,7 +32,7 @@ public class TestListeners extends ScreenshotManager implements ITestListener {
 		test.fail(result.getThrowable());
 		String filePath = null;
 		try {
-			filePath = getScreenshot(result.getMethod().getMethodName());
+			filePath = getScreenshot(result.getMethod().getMethodName(),driver);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -41,29 +41,24 @@ public class TestListeners extends ScreenshotManager implements ITestListener {
 
 	@Override
 	public void onTestSkipped(ITestResult result) {
-		System.out.println("Test Skipped: " + result.getName());
 	}
 
 	@Override
 	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-		System.out.println("Test Failed but within success percentage: " + result.getName());
 	}
 
 	@Override
 	public void onTestFailedWithTimeout(ITestResult result) {
-		System.out.println("Test Failed with Timeout: " + result.getName());
 		// Treat as normal failure
 		onTestFailure(result);
 	}
 
 	@Override
 	public void onStart(ITestContext context) {
-		System.out.println("Test Suite Started: " + context.getName());
 	}
 
 	@Override
 	public void onFinish(ITestContext context) {
-		System.out.println("Test Suite Finished: " + context.getName());
 	}
 
 }
