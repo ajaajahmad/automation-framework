@@ -17,20 +17,22 @@ public class TestListeners extends ScreenshotManager implements ITestListener {
 
 	ExtentTest test;
 	ExtentReports extent = ExtentReportManager.getReportObject();
+	ThreadLocal<ExtentTest> thread = new ThreadLocal<ExtentTest>();
 
 	@Override
 	public void onTestStart(ITestResult result) {
 		test = extent.createTest(result.getMethod().getMethodName());
+		thread.set(test); // unique thread id -> tests
 	}
 
 	@Override
 	public void onTestSuccess(ITestResult result) {
-		test.log(Status.PASS, "Test Passed");
+		thread.get().log(Status.PASS, "Test Passed");
 	}
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-		test.fail(result.getThrowable());
+		thread.get().fail(result.getThrowable());
 
 		try {
 			driver = (WebDriver) result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
@@ -44,7 +46,7 @@ public class TestListeners extends ScreenshotManager implements ITestListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		test.addScreenCaptureFromPath(filePath, result.getMethod().getMethodName());
+		thread.get().addScreenCaptureFromPath(filePath, result.getMethod().getMethodName());
 	}
 
 	@Override
