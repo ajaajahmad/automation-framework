@@ -2,6 +2,7 @@ package com.automation.listeners;
 
 import java.io.IOException;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -30,6 +31,13 @@ public class TestListeners extends ScreenshotManager implements ITestListener {
 	@Override
 	public void onTestFailure(ITestResult result) {
 		test.fail(result.getThrowable());
+
+		try {
+			driver = (WebDriver) result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
+		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+			e.printStackTrace();
+		}
+
 		String filePath = null;
 		try {
 			filePath = getScreenshot(driver, result.getMethod().getMethodName());
