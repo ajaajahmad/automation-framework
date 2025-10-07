@@ -4,7 +4,7 @@
 
 	<listeners>
 
-		<listener class-name="com.automation.utils.TestListeners" />
+		<listener class-name="com.automation.listeners.TestListeners" />
 
 	</listeners>
 

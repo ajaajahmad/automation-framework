@@ -32,7 +32,7 @@ public class TestListeners extends ScreenshotManager implements ITestListener {
 		test.fail(result.getThrowable());
 		String filePath = null;
 		try {
-			filePath = getScreenshot(result.getMethod().getMethodName(),driver);
+			filePath = getScreenshot(driver, result.getMethod().getMethodName());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -59,6 +59,7 @@ public class TestListeners extends ScreenshotManager implements ITestListener {
 
 	@Override
 	public void onFinish(ITestContext context) {
+		extent.flush();
 	}
 
 }
