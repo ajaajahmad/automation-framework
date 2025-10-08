@@ -10,10 +10,11 @@ import org.testng.Assert;
 import com.automation.base.BaseTest;
 import com.automation.pages.CartPage;
 import com.automation.pages.ProductCateloguePage;
+import com.automation.utils.RetryManager;
 
 public class ErrorValidationsTest extends BaseTest {
 
-	@Test (groups= {"ErrorValidation"})
+	@Test (groups= {"ErrorValidation"}, retryAnalyzer=RetryManager.class)
 	public void loginErrorValidation() {
 
 		String productName = "ZARA COAT 3";
@@ -21,7 +22,7 @@ public class ErrorValidationsTest extends BaseTest {
 		Assert.assertEquals(landingPage.getErrorMessage(), "Incorrect email or password.");
 	}
 
-	@Test
+	@Test(retryAnalyzer=RetryManager.class)
 	public void productErrorValidation() throws IOException, InterruptedException {
 
 		String productName = "ZARA COAT 3";

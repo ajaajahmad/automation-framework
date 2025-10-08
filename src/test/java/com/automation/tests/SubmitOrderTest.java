@@ -15,6 +15,7 @@ import com.automation.pages.ConfirmationPage;
 import com.automation.pages.OrderPage;
 import com.automation.pages.ProductCateloguePage;
 import com.automation.utils.JsonDataReader;
+import com.automation.utils.RetryManager;
 
 public class SubmitOrderTest extends BaseTest {
 
@@ -41,7 +42,7 @@ public class SubmitOrderTest extends BaseTest {
 
 	}
 
-	@Test(dataProvider = "getData", dependsOnMethods = { "submitOrder" })
+	@Test(dataProvider = "getData", dependsOnMethods = { "submitOrder" }, retryAnalyzer=RetryManager.class)
 	public void orderHistory(HashMap<String, String> input) {
 		ProductCateloguePage productCatelogue = landingPage.userLogin(input.get("email"), input.get("password"));
 		OrderPage orderPage = productCatelogue.goToOrdersPage();
